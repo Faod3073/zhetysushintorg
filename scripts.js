@@ -6,7 +6,7 @@ function registerUser() {
 
     if (username && email && password) {
         alert(`${username}, регистрация прошла успешно!`);
-        window.location.href = "shintorg.html";  // Возвращаем пользователя на главную страницу после регистрации
+        window.location.href = "index.html";  // Возвращаем пользователя на главную страницу после регистрации
     } else {
         alert("Регистрация не завершена. Пожалуйста, заполните все поля.");
     }
