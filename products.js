@@ -1,6 +1,6 @@
 const productsData = [
-    { id: 1, name: "H818", price: 19300, quantity: 4, img:"C:\Users\User\Downloads\Рисунок1.png"},
-    { id: 2, name: "I-1", price: 45200, quantity: 4, img:"C:\Users\User\Downloads\Рисунок2.png" },
+    { id: 1, name: "H818", price: 19300, quantity: 4, img:"Рисунок1.png"},
+    { id: 2, name: "I-1", price: 45200, quantity: 4, img:"Рисунок2.png" },
 ];
 
 // Get the products container element
