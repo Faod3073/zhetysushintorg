@@ -34,7 +34,7 @@ nav ul li a:hover {
 /* Background */
 .background {
     position: relative;
-    background: url("C:\Users\User\Downloads\polat-lastik-1.png") no-repeat center center/cover;
+    background: url("polat-lastik-1.png") no-repeat center center/cover;
     background-size: cover;
     height: 100vh;
     display: flex;
