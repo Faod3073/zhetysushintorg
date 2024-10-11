@@ -6,7 +6,7 @@ function registerUser() {
 
     if (username && email && password) {
         alert(`${username}, регистрация прошла успешно!`);
-        window.location.href = "index.html";  // Возвращаем пользователя на главную страницу после регистрации
+        window.location.href = "index.html"; 
     } else {
         alert("Регистрация не завершена. Пожалуйста, заполните все поля.");
     }
@@ -14,20 +14,19 @@ function registerUser() {
 
 // Обратная связь
 document.addEventListener('DOMContentLoaded', () => {
-    emailjs.init("yeSbghFVquT29L6sZ");  // Инициализация с вашим ключом
+    emailjs.init("yeSbghFVquT29L6sZ");  
 
     const contactForm = document.getElementById('contactForm');
     const formResponse = document.getElementById('formResponse');
 
     contactForm.addEventListener('submit', function(event) {
-        event.preventDefault();  // Отключаем стандартное поведение формы
+        event.preventDefault();  
 
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
 
         if (name && email && message) {
-            // Отправляем данные через EmailJS
             emailjs.send("service_72wpt6c", "template_nxp0a5x", {
                 name: name,
                 email: email,
@@ -36,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 formResponse.textContent = 'Спасибо, ' + name + '! Ваше сообщение отправлено.';
                 contactForm.reset();  // Сбрасываем форму
             }).catch((error) => {
-                console.log(error);  // Log the error for debugging
+                console.log(error); 
                 formResponse.textContent = 'Произошла ошибка при отправке сообщения. Попробуйте еще раз.';
             });
         } else {
