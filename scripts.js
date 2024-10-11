@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 formResponse.textContent = 'Спасибо, ' + name + '! Ваше сообщение отправлено.';
                 contactForm.reset();  // Сбрасываем форму
             }).catch((error) => {
-                console.log(error);  // Log the error for debugging
+                console.log(error);  
                 formResponse.textContent = 'Произошла ошибка при отправке сообщения. Попробуйте еще раз.';
             });
         } else {
@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Товары
-        // Get the products container element
         const productsContainer = document.querySelector('.products-container');
 
         const productsData = [
@@ -69,21 +68,17 @@ document.addEventListener('DOMContentLoaded', () => {
             productsContainer.appendChild(productCard);
         });
 
-        // Add event listeners for add to cart buttons
         productsContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('add-to-cart')) {
                 const productId = e.target.getAttribute('data-id');
                 const product = productsData.find((product) => product.id === parseInt(productId));
                 if (product) {
-                    // Add product to cart
                     addProductToCart(product);
                 }
             }
         });
 
-        // Function to add product to cart
         function addProductToCart(product) {
-            // Get the cart data from local storage
             let cartData = localStorage.getItem('cart');
             if (cartData === null) {
                 cartData = [];
@@ -91,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 cartData = JSON.parse(cartData);
             }
 
-            // Check if product is already in cart
             const existingProduct = cartData.find((item) => item.id === product.id);
             if (existingProduct) {
                 existingProduct.quantity++;
@@ -99,10 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 cartData.push({ id: product.id, name: product.name, price: product.price, quantity: 1 });
             }
 
-            // Save cart data to local storage
             localStorage.setItem('cart', JSON.stringify(cartData));
 
-            // Redirect to cart page
             window.location.href = 'cart.html';
         }
 // Корзина
