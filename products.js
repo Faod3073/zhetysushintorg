@@ -3,11 +3,9 @@ const productsData = [
     { id: 2, name: "I-1", price: 45200, quantity: 4, img:"Рисунок2.png" },
 ];
 
-// Get the products container element
 const productsContainer = document.querySelector('.products-container');
 console.log('productsContainer:', productsContainer);
 
-// Add event listener to products container
 productsContainer.addEventListener('click', (event) => {
     // ...
 });
@@ -17,13 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // ...
     });
   });
-// Render products
 productsData.forEach((product) => {
     const productCard = document.createElement('div');
     productCard.className = 'product-item';
     productCard.dataset.name = product.name;
 
-    // Create product card HTML content
     const productCardContent = `
         <img src="${product.name}.png" alt="${product.name}">
         <h3>${product.name}</h3>
@@ -36,7 +32,6 @@ productsData.forEach((product) => {
     productsContainer.appendChild(productCard);
 });
 
-// Add event listener to products container
 productsContainer.addEventListener('click', (event) => {
     if (event.target.classList.contains('add-to-cart')) {
         const productId = event.target.getAttribute('data-id');
@@ -44,12 +39,11 @@ productsContainer.addEventListener('click', (event) => {
 
         if (product) {
             addProductToCart(product);
-            window.location.href = 'cart.html'; // Transition to cart page
+            window.location.href = 'cart.html'; 
         }
     }
 });
 
-// Function to add product to cart
 function addProductToCart(product) {
     let cartData = localStorage.getItem('cart');
 
@@ -80,9 +74,9 @@ function searchProducts() {
     productItems.forEach(product => {
         const productName = product.getAttribute('data-name').toLowerCase();
         if (productName.includes(input)) {
-            product.style.display = 'block';  // Показать продукт, если имя совпадает с запросом
+            product.style.display = 'block';  
          } else {
-            product.style.display = 'none';  // Скрыть продукт, если запрос не совпадает
+            product.style.display = 'none';  
         }
     });
 };
