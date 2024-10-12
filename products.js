@@ -1,15 +1,7 @@
-const productsContainer = document.getElementById("products-container");
-
-productsData.forEach(product => {
-    const productElement = document.createElement("div");
-    productElement.innerHTML = `
-        <img src="${product.img}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>Price: ${product.price}</p>
-        <p>Quantity: ${product.quantity}</p>
-    `;
-    productsContainer.appendChild(productElement);
-});
+const productsData = [
+    { id: 1, name: "H818", price: 19300, quantity: 4},
+    { id: 2, name: "I-1", price: 45200, quantity: 4},
+];
 
 const productsContainer = document.querySelector('.products-container');
 console.log('productsContainer:', productsContainer);
