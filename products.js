@@ -1,6 +1,6 @@
 const productsData = [
-    { id: 1, name: "H818", description: "Шины для вилочных погрузчиков - производство Китай", price: 19300, quantity: 4},
-    { id: 2, name: "I-1", description: "Сельхоз шины - производство Китай". price: 45200, quantity: 4},
+    { id: 1, name: "H818", price: 19300, quantity: 4},
+    { id: 2, name: "I-1", price: 45200, quantity: 4},
 ];
 
 const productsContainer = document.querySelector('.products-container');
