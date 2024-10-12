@@ -1,6 +1,6 @@
 const productsData = [
-    { id: 1, name: "H818", price: 19300, quantity: 4},
-    { id: 2, name: "I-1", price: 45200, quantity: 4},
+    { id: 1, name: "H818", price: 19300, quantity: 4, img: "H818.png"},
+    { id: 2, name: "I-1", price: 45200, quantity: 4, img: "I-1.png"},
 ];
 
 const productsContainer = document.querySelector('.products-container');
