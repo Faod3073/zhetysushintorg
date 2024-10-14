@@ -4,8 +4,11 @@ function registerUser() {
     const password = document.getElementById('password').value;
 
     if (username && email && password) {
+        localStorage.setItem('username', username);
+        localStorage.setItem('email', email);
+
         alert(`${username}, регистрация прошла успешно!`);
-        window.location.href = "index.html";  
+        window.location.href = "shintorg.html";
     } else {
         alert("Регистрация не завершена. Пожалуйста, заполните все поля.");
     }
