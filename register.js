@@ -8,7 +8,7 @@ function registerUser() {
         localStorage.setItem('email', email);
 
         alert(`${username}, регистрация прошла успешно!`);
-        window.location.href = "shintorg.html";
+        window.location.href = "account.html";
     } else {
         alert("Регистрация не завершена. Пожалуйста, заполните все поля.");
     }
