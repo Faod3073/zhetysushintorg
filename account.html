@@ -22,19 +22,5 @@
         <p>Добро пожаловать, <span id="usernameDisplay"></span>!</p>
         <p>Email: <span id="emailDisplay"></span></p>
     </section>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const username = localStorage.getItem('username');
-            const email = localStorage.getItem('email');
-
-            if (username && email) {
-                document.getElementById('usernameDisplay').textContent = username;
-                document.getElementById('emailDisplay').textContent = email;
-            } else {
-                window.location.href = "register.html";
-            }
-        });
-    </script>
 </body>
 </html>
