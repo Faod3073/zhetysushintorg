@@ -6,11 +6,6 @@ const bodyParser = require('body-parser');
 // Connect to the database
 const db = new sqlite3.Database('./database.db');
 
-const productsData = [
-  { id: 1, name: 'H818', price: 19300, quantity: 4, img: 'Рисунок1.png' },
-  { id: 2, name: 'I-1', price: 45200, quantity: 4, img: 'Рисунок2.png' },
-];
-
 // Use body-parser middleware to parse JSON requests
 app.use(bodyParser.json());
 
