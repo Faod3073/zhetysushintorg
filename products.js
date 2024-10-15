@@ -1,8 +1,7 @@
 const productsData = [
-    { id: 1, name: "H818", price: 19300, quantity: 4, img: "H818.png"},
-    { id: 2, name: "I-1", price: 45200, quantity: 4, img: "I-1.png"},
+    { id: 1, name: "H818", price: 19300, quantity: 4, img:"C:\Users\User\Downloads\Рисунок1.png"},
+    { id: 2, name: "I-1", price: 45200, quantity: 4, img:"C:\Users\User\Downloads\Рисунок2.png" },
 ];
-
 const productsContainer = document.querySelector('.products-container');
 console.log('productsContainer:', productsContainer);
 
@@ -74,7 +73,7 @@ function searchProducts() {
     productItems.forEach(product => {
         const productName = product.getAttribute('data-name').toLowerCase();
         if (productName.includes(input)) {
-            product.style.display = 'block';  
+            product.style.display = 'block'; 
          } else {
             product.style.display = 'none';  
         }
