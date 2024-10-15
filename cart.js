@@ -1,28 +1,46 @@
-const cartList = document.getElementById('cart-list');
-const totalPriceElement = document.getElementById('total-price');
-const checkoutButton = document.getElementById('checkout-button');
+let cartData = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     const cartList = document.getElementById('cart-list');
+    const totalPriceElement = document.getElementById('total-price');
+    const checkoutButton = document.getElementById('checkout-button');
+
+    // Load the cart data from the server
+    fetch('/cart')
+        .then(response => response.json())
+        .then(data => {
+            cartData = data;
+            updateCartUI();
+        })
+        .catch(error => console.error(error));
+
     cartList.addEventListener('click', (e) => {
-      if (e.target.classList.contains('remove-from-cart')) {
-        const productId = e.target.getAttribute('data-id');
-        const index = cartData.findIndex((item) => item.id === parseInt(productId));
-        if (index !== -1) {
-          cartData.splice(index, 1);
-          localStorage.setItem('cart', JSON.stringify(cartData));
-          updateCartUI();
+        if (e.target.classList.contains('remove-from-cart')) {
+            const productId = e.target.getAttribute('data-id');
+            // Send a DELETE request to the server to remove the product from the cart
+            fetch(`/cart/${productId}`, { method: 'DELETE' })
+                .then(response => response.json())
+                .then(data => {
+                    cartData = data;
+                    updateCartUI();
+                })
+                .catch(error => console.error(error));
         }
-      }
     });
-  });
-  
-let cartData = localStorage.getItem('cart');
-if (cartData === null) {
-    cartData = [];
-} else {
-    cartData = JSON.parse(cartData);
-}
+
+    checkoutButton.addEventListener('click', () => {
+        // Send a POST request to the server to checkout the cart
+        fetch('/checkout', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                alert('Покупка завершена!');
+                cartData = [];
+                updateCartUI();
+            })
+            .catch(error => console.error(error));
+    });
+});
+
 function updateCartUI() {
     cartList.innerHTML = '';
     cartData.forEach((item) => {
@@ -37,6 +55,7 @@ function updateCartUI() {
     });
     updateTotalPrice();
 }
+
 function updateTotalPrice() {
     let totalPrice = 0;
     cartData.forEach((item) => {

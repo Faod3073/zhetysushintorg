@@ -1,67 +1,38 @@
-const productsData = [
-    { id: 1, name: "H818", price: 19300, quantity: 4, img:"C:\Users\User\Downloads\Рисунок1.png"},
-    { id: 2, name: "I-1", price: 45200, quantity: 4, img:"C:\Users\User\Downloads\Рисунок2.png" },
-];
-const productsContainer = document.querySelector('.products-container');
-console.log('productsContainer:', productsContainer);
+// Send a GET request to the server to retrieve product data
+fetch('/products')
+    .then(response => response.json())
+    .then(data => {
+        // Update the DOM with the product data
+        const productList = document.getElementById('product-list');
+        data.forEach(product => {
+            const li = document.createElement('li');
+            li.textContent = `${product.name} - $${product.price}`;
+            productList.appendChild(li);
+        });
+    })
+    .catch(error => console.error(error));
 
-productsContainer.addEventListener('click', (event) => {
-    // ...
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const productsContainer = document.querySelector('.products-container');
-    productsContainer.addEventListener('click', (event) => {
-      // ...
-    });
-  });
-productsData.forEach((product) => {
-    const productCard = document.createElement('div');
-    productCard.className = 'product-item';
-    productCard.dataset.name = product.name;
-
-    const productCardContent = `
-        <img src="${product.name}.png" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>Цена: ${product.price} тг.</p>
-        <p>Количество: ${product.quantity}</p>
-        <button class="add-to-cart" data-id="${product.id}">Добавить в корзину</button>
-    `;
-
-    productCard.innerHTML = productCardContent;
-    productsContainer.appendChild(productCard);
-});
-
-productsContainer.addEventListener('click', (event) => {
+// Add event listener to the "Add to Cart" button
+document.addEventListener('click', event => {
     if (event.target.classList.contains('add-to-cart')) {
         const productId = event.target.getAttribute('data-id');
-        const product = productsData.find((product) => product.id === parseInt(productId));
+        const quantity = 1;
 
-        if (product) {
-            addProductToCart(product);
-            window.location.href = 'cart.html'; 
-        }
+        // Send a POST request to the server to add the product to the cart
+        fetch('/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: 1, product_id: productId, quantity: quantity })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Product added to cart:', data);
+        })
+        .catch(error => console.error(error));
     }
 });
-
-function addProductToCart(product) {
-    let cartData = localStorage.getItem('cart');
-
-    if (cartData === null) {
-        cartData = []; 
-    } else {
-        cartData = JSON.parse(cartData); 
-    }
-
-    const existingProductIndex = cartData.findIndex((item) => item.id === product.id);
-
-    if (existingProductIndex !== -1) {
-        cartData[existingProductIndex].quantity++;
-    } else {
-        cartData.push({ id: product.id, name: product.name, price: product.price, quantity: 1 });
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cartData)); 
-}
 
 // Функция для поиска продуктов
 document.getElementById('searchInput').addEventListener('input', searchProducts);
