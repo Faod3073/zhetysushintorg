@@ -1,3 +1,64 @@
+const express = require('express');
+const sql = require('mssql');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+// Use body-parser middleware to parse JSON requests
+app.use(bodyParser.json());
+
+// Database connection configuration
+const dbConfig = {
+    user: '',  // leave empty for Windows Authentication
+    password: '',  // leave empty for Windows Authentication
+    server: 'localhost',
+    database: 'master',
+    options: {
+        trustServerCertificate: true,  
+    }
+};
+
+// Connect to the database
+sql.connect(config).then(pool => {
+    console.log('Connected to MSSQL');
+
+    // Set up a route to retrieve cart data
+    app.get('/cart', async (req, res) => {
+        try {
+            const result = await pool.request().query('SELECT * FROM cart');
+            res.json(result.recordset);
+        } catch (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error getting cart data' });
+        }
+    });
+
+    // Set up a route to remove a product from the cart
+    app.delete('/cart/:productId', async (req, res) => {
+        const productId = req.params.productId;
+        try {
+            await pool.request()
+                .input('productId', sql.Int, productId)
+                .query('DELETE FROM cart WHERE id = @productId');
+            res.json({ message: 'Product removed from cart' });
+        } catch (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error removing product from cart' });
+        }
+    });
+
+    // Set up a route to checkout the cart
+    app.post('/checkout', async (req, res) => {
+        try {
+            await pool.request().query('DELETE FROM cart');
+            res.json({ message: 'Cart checked out successfully' });
+        } catch (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error checking out cart' });
+        }
+    });
+});
+
 let cartData = [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -78,4 +139,8 @@ cartList.addEventListener('click', (e) => {
 checkoutButton.addEventListener('click', () => {
     alert('Покупка завершена!');
 });
-updateCartUI();
+updateCartUI()
+.catch(err => {
+    console.error(err);
+    console.log('Error connecting to MSSQL');
+});

@@ -27,4 +27,4 @@ document.addEventListener('DOMContentLoaded', () => {
             formResponse.textContent = 'Заполните все поля.';
         }
     });
-});
+})
