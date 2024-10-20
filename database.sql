@@ -14,10 +14,6 @@ CREATE TABLE products (
     stock INT NOT NULL,
     category TEXT NOT NULL
 );
-INSERT INTO products (id, name, price, quantity, img)
-VALUES
-    (1, 'H818', 19300, 4, 'H818.png'),
-    (2, 'I-1', 45200, 4, 'I-1.png');
 
 CREATE TABLE orders (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

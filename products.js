@@ -1,4 +1,28 @@
+const productsData = [
+    { id: 1, name: 'H818', price: 19300, quantity: 4, img: 'H818.png' },
+    { id: 2, name: 'I-1', price: 45200, quantity: 4, img: 'I-1.png' }
+];
 
+// Function to display products on the page
+function displayProducts(products) {
+    const productsContainer = document.getElementById('products');
+    productsContainer.innerHTML = ''; // Clear any existing content
+
+    products.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.className = 'product';
+        productDiv.innerHTML = `
+            <img src="${product.img}" alt="${product.name}">
+            <h2>${product.name}</h2>
+            <p>Цена: ${product.price} тг</p>
+            <p>Количество: ${product.quantity}</p>
+            <button>Добавить в корзину</button>
+        `;
+        productsContainer.appendChild(productDiv);
+    });
+}
+// Call the function to display products when the page loads
+displayProducts(productsData);
 // Send a GET request to the server to retrieve product data
 fetch('/products')
     .then(response => response.json())
