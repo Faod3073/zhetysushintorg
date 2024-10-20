@@ -10,19 +10,22 @@ function displayProducts(products) {
 
     products.forEach(product => {
         const productDiv = document.createElement('div');
-        productDiv.className = 'product';
+        productDiv.className = 'product-item';
+        productDiv.setAttribute('data-name', product.name);
         productDiv.innerHTML = `
             <img src="${product.img}" alt="${product.name}">
             <h2>${product.name}</h2>
             <p>Цена: ${product.price} тг</p>
             <p>Количество: ${product.quantity}</p>
-            <button>Добавить в корзину</button>
+            <button class="add-to-cart" data-id="${product.id}">Добавить в корзину</button>
         `;
         productsContainer.appendChild(productDiv);
     });
 }
+
 // Call the function to display products when the page loads
 displayProducts(productsData);
+
 // Send a GET request to the server to retrieve product data
 fetch('/products')
     .then(response => response.json())
@@ -70,8 +73,8 @@ function searchProducts() {
         const productName = product.getAttribute('data-name').toLowerCase();
         if (productName.includes(input)) {
             product.style.display = 'block'; 
-         } else {
+        } else {
             product.style.display = 'none';  
         }
     });
-};
+}
